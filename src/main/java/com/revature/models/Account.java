@@ -1,11 +1,15 @@
 package com.revature.models;
 
+import com.revature.services.UserService;
+import com.revature.services.UserServiceImpl;
+
 public class Account {
 	private int id;
 	private double balance;
 	private int user_id;
 	private String accountType;
 	private String accountStatus;
+	private UserService uServ = new UserServiceImpl();
 	public Account()
 	{
 		super();
@@ -60,8 +64,8 @@ public class Account {
 	}
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", balance=" + balance + ", user_id=" + user_id + ", accountType=" + accountType
-				+ ", accountStatus=" + accountStatus + "]";
+		return "Account #" + id + "\nBalance: " + balance + "\nOwner: " + uServ.findUser(user_id).getUsername() + "\nAccount Type: " + accountType
+				+ "\nAccount Status: " + accountStatus;
 	}
 	
 	

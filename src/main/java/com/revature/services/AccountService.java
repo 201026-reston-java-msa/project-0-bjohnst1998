@@ -8,7 +8,7 @@ public interface AccountService {
 	public List<Account> findAll();
 	public List<Account> findByUser(int userId);
 	public Account findAccount(int accountID);
-	public boolean insert(Account a);
+	public int insert(Account a);
 	public boolean update(Account a);
 	public boolean transfer(Account a, Account b,double amount);
 	public boolean deposit(Account a, double amount);

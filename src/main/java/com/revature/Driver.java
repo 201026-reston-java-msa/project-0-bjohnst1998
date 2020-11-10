@@ -1,12 +1,14 @@
 package com.revature;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import org.apache.log4j.Logger;
+
 import com.revature.models.Account;
 import com.revature.models.User;
+import com.revature.repositories.EmployeeDAOImpl;
 import com.revature.services.AccountService;
 import com.revature.services.AccountServiceImpl;
 import com.revature.services.UserService;
@@ -17,16 +19,17 @@ public class Driver {
 	static User loggedInUser = new User();
 	static UserService userServ = new UserServiceImpl();
 	static AccountService aServ = new AccountServiceImpl();
+	private static Logger log = Logger.getLogger(EmployeeDAOImpl.class);
+	static boolean wantsToQuit = false;
 
 	public static void main(String[] args) {
 		run();
-	
+
 	}
 
 	static void run() {
 		Scanner in = new Scanner(System.in);
 		String userInput;
-		boolean wantsToQuit = false;
 
 		while (!wantsToQuit) {
 			System.out.println("Welcome to Ben & Co Banking Services\nDo you have an existing account? [Y/N]");
@@ -41,20 +44,18 @@ public class Driver {
 				userInput = in.nextLine();
 				if (userInput.equalsIgnoreCase("y")) {
 					createAccount(in);
-				}				
+				}
 			}
 			System.out.println("Would you like to quit? Y/N");
-			userInput=in.nextLine();
-			if(userInput.equalsIgnoreCase("y"))
-			{
-				wantsToQuit=true;
+			userInput = in.nextLine();
+			if (userInput.equalsIgnoreCase("y")) {
+				wantsToQuit = true;
 			}
 		}
 
 	}
 
-	static void logIn(Scanner in)
-	{
+	static void logIn(Scanner in) {
 		System.out.println("Please enter your Username\n");
 		String username = in.nextLine();
 		System.out.println("Please enter your Password\n");
@@ -76,7 +77,7 @@ public class Driver {
 			}
 		}
 	}
-	
+
 	static void createAccount(Scanner in) {
 		System.out.println("Please enter a username: \n");
 		String username = in.nextLine();
@@ -88,13 +89,11 @@ public class Driver {
 		String lastName = in.nextLine();
 		System.out.println("Please enter your email: \n");
 		String email = in.nextLine();
-		
-		if(userServ.checkIfUsernameExists(username))
-		{
+
+		if (userServ.checkIfUsernameExists(username)) {
 			System.out.println("An account with that username already exists.\n");
 			createAccount(in);
-		}
-		else {
+		} else {
 			User u = new User();
 			u.setUsername(username);
 			u.setPassword(password);
@@ -102,32 +101,147 @@ public class Driver {
 			u.setFirstName(firstName);
 			u.setLastName(lastName);
 			u.setPermissionLevel("customer");
-			if(userServ.insert(u))
-			{
+			if (userServ.insert(u)) {
 				System.out.println("Your account has been created.\nPlease log in");
 				logIn(in);
-			}
-			else {
+			} else {
 				System.out.println("Account creation failed! Please try again\n");
 			}
+
+		}
+
+	}
+
+	static void customerCommands(Scanner in) {
+		System.out.println(
+				"1: Create bank account\n2: View your accounts\n3: View personal information\n4: Perform transaction\n5: Sign out");
+		String input = in.nextLine();
+
+		if (input.equals("1")) {
+			openAccount(in);
+		} else if (input.equals("2")) {
+			viewUsersAccounts(in, loggedInUser);
+		} else if (input.equals("3")) {
 			
+		} else if (input.equals("4")) {
+
+		} else if (input.equals("5")) {
+			wantsToQuit=true;
 		}
 		
 	}
-	
-	static void customerCommands(Scanner in)
-	{
-		System.out.println("1: Create bank account\n2: View your accounts\n3: View personal information\n4: Perform transaction\n5: Sign out");
-	}
-	
-	static void employeeCommands(Scanner in)
-	{
-		System.out.println("1:Look up user\n2:Look up account\n3:Approve accounts\n4: Sign out");
-	}
-	static void adminCommands(Scanner in)
-	{
-		System.out.println("1:Look up user\n2:Look up account\n3:Approve accounts\n4:Perform transaction\n5:Cancel accounts\n6: Sign out");
 
+	static void employeeCommands(Scanner in) {
+		System.out.println("1:Look up user\n2:Look up account\n3:Approve accounts\n4: Sign out");
+		String input = in.nextLine();
+
+		if (input.equals("1")) {
+			
+		} else if (input.equals("2")) {
+
+		} else if (input.equals("3")) {
+
+		} else if (input.equals("4")) {
+
+		} else if (input.equals("5")) {
+
+		}
+	}
+
+	static void adminCommands(Scanner in) {
+		System.out.println(
+				"1:Look up user\n2:Look up account\n3:Approve accounts\n4:Perform transaction\n5:Cancel accounts\n6: Sign out");
+		String input = in.nextLine();
+
+		if (input.equals("1")) {
+
+		} else if (input.equals("2")) {
+
+		} else if (input.equals("3")) {
+
+		} else if (input.equals("4")) {
+
+		} else if (input.equals("5")) {
+
+		}
+	}
+	
+	static void openAccount(Scanner in)
+	{
+		System.out.println("What kind of account would you like to open?\n1: Checkings\n2: Savings");
+		String input = in.nextLine();
+		String accountType = "checking";
+		if(input.equals("1"))
+		{
+			accountType = "checking";
+		}
+		else if(input.equals("2")) {
+			accountType= "savings";
+		}
+		else {
+			System.out.println("That is not a valid account type");
+			openAccount(in);
+		}
+		Account a = new Account(0, loggedInUser.getId(), accountType);
+		a.setId(aServ.insert(a));
+		if(a.getId() != 0)
+		{
+			System.out.println("Account #"+a.getId()+" created!");
+			System.out.println("Please deposit a starting balance: $");
+			double d= in.nextDouble();
+			aServ.deposit(a, d);
+			System.out.println("You deposited: $" + d +"\n");
+			System.out.println("Your account is now pending approval by an employee.\nWhile the account is pending you may not perform transactions.");
+		}
+		else {
+			log.warn("Failed to create account! Please try again");
+			createAccount(in);
+		}
+		
+		evaluatePermissionContent(in);
+		
+		
+		
+	}
+	static void viewUsersAccounts(Scanner in,User u)
+	{
+		List<Account> list = aServ.findByUser(u.getId());
+		for(Account a : list)
+		{	
+			System.out.println("--------------------");
+			System.out.println(a.toString());
+			System.out.println("--------------------");
+		}
+		
+	}
+	static void viewAccount(Scanner in,int accountID)
+	{
+		Account a = aServ.findAccount(accountID);
+		
+			System.out.println("--------------------");
+			System.out.println(a.toString());
+			System.out.println("--------------------");
+	}
+	
+	static void viewUser(Scanner in, int userId)
+	{
+		User u = userServ.findUser(userId);
+		System.out.println("--------------------");
+		System.out.println(u.toString());
+		System.out.println("--------------------");
+	}
+	static void evaluatePermissionContent(Scanner in)
+	{
+		if (loggedInUser.getPermissionLevel().equals("customer")) {
+			// Customer Logic
+			customerCommands(in);
+		} else if (loggedInUser.getPermissionLevel().equals("employee")) {
+			// Employee Logic
+			employeeCommands(in);
+		} else if (loggedInUser.getPermissionLevel().equals("admin")) {
+			// admin logic
+			adminCommands(in);
+		}
 	}
 	
 }

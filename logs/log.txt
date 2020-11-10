@@ -37,3 +37,28 @@ org.postgresql.util.PSQLException: ERROR: null value in column "permissionlevel"
 	at com.revature.Driver.createAccount(Driver.java:101)
 	at com.revature.Driver.run(Driver.java:43)
 	at com.revature.Driver.main(Driver.java:22)
+2020-11-10 14:20:41 DEBUG EmployeeDAOImpl:127 - warlock was found in DB.
+2020-11-10 14:20:45 WARN  EmployeeDAOImpl:120 - Could not access database
+org.postgresql.util.PSQLException: ERROR: null value in column "account_id" violates not-null constraint
+  Detail: Failing row contains (null, 0.00, checking, Pending, 5).
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:124)
+	at com.revature.repositories.AccountDAOImpl.insert(AccountDAOImpl.java:111)
+	at com.revature.services.AccountServiceImpl.insert(AccountServiceImpl.java:35)
+	at com.revature.Driver.openAccount(Driver.java:188)
+	at com.revature.Driver.customerCommands(Driver.java:123)
+	at com.revature.Driver.logIn(Driver.java:72)
+	at com.revature.Driver.run(Driver.java:42)
+	at com.revature.Driver.main(Driver.java:27)
+2020-11-10 14:20:45 WARN  EmployeeDAOImpl:197 - Failed to create account! Please try again
+2020-11-10 14:21:21 DEBUG EmployeeDAOImpl:127 - warlock was found in DB.
+2020-11-10 14:21:24 DEBUG EmployeeDAOImpl:112 - New account was inserted successfully
+2020-11-10 14:53:29 DEBUG EmployeeDAOImpl:127 - warlock was found in DB.
+2020-11-10 14:53:32 DEBUG EmployeeDAOImpl:59 - 5's account #100was found successfully
+2020-11-10 14:58:05 DEBUG EmployeeDAOImpl:127 - warlock was found in DB.
+2020-11-10 14:58:06 DEBUG EmployeeDAOImpl:59 - 5's account #100was found successfully

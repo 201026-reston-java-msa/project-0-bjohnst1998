@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +56,8 @@ public class AccountDAOImpl implements AccountDAO {
 			{
 			 Account a = new Account(rs.getInt("account_id"), rs.getDouble("balance"), rs.getInt("user_id"),rs.getString("account_type"),rs.getString("account_status"));
 			 list.add(a);
+				log.debug(userId+ "'s account #"+a.getId() + "was found successfully");
+
 			}
 			return list;
 			
@@ -82,7 +85,8 @@ public class AccountDAOImpl implements AccountDAO {
 			while (rs.next()) {
 				a = new Account(rs.getInt("account_id"), rs.getDouble("balance"), rs.getInt("user_id"),rs.getString("account_type"),rs.getString("account_status"));
 				
-				
+				log.debug(a.getId() + "was found successfully");
+
 
 			}
 
@@ -94,25 +98,30 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
-	public boolean insert(Account a) {
+	public int insert(Account a) {
 
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "INSERT INTO account(balance,user_id,account_type, account_status) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO account(balance,user_id,account_type, account_status) VALUES (?,?,?,?) RETURNING account_id";
 
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			ps.setDouble(1, a.getBalance());
 			ps.setInt(2, a.getUser_id());
 			ps.setString(3, a.getAccountType());
 			ps.setString(4, a.getAccountStatus());
 			ps.executeUpdate();
+			log.debug("New account was inserted successfully");
+			ResultSet rs = ps.getGeneratedKeys();
+			while(rs.next())
+			{
+				return rs.getInt("account_id");
+			}
 
 		} catch (SQLException e) {
 			log.warn("Could not access database", e);
-			return false;
+			return 0;
 
 		}
-
-		return true;
+		return 0;
 	}
 
 	@Override
@@ -128,7 +137,7 @@ public class AccountDAOImpl implements AccountDAO {
 			ps.setString(4, a.getAccountStatus());
 
 			ps.executeUpdate();
-
+			log.debug(a.getId() + "was updated successfully");
 		} catch (SQLException e) {
 			log.warn("Could not access database", e);
 			return false;

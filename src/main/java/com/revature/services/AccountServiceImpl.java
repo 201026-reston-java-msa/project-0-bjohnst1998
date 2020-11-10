@@ -30,7 +30,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public boolean insert(Account a) {
+	public int insert(Account a) {
 
 		return aDao.insert(a);
 	}
