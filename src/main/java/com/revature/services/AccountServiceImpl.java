@@ -75,4 +75,9 @@ public class AccountServiceImpl implements AccountService {
 		}	
 	}
 
+	@Override
+	public List<Account> findByStatus(String status) {
+		return aDao.findByStatus(status);
+	}
+
 }

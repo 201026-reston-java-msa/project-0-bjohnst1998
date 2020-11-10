@@ -7,6 +7,7 @@ import com.revature.models.Account;
 public interface AccountService {
 	public List<Account> findAll();
 	public List<Account> findByUser(int userId);
+	public List<Account> findByStatus(String status);
 	public Account findAccount(int accountID);
 	public int insert(Account a);
 	public boolean update(Account a);

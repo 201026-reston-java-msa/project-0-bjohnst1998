@@ -168,4 +168,33 @@ public class AccountDAOImpl implements AccountDAO {
 		return true;
 	}
 
+	@Override
+	public List<Account> findByStatus(String status) {
+		
+		List<Account> list = new ArrayList<>();
+		try(Connection connection = ConnectionUtil.getConnection())
+		{
+			String sql = "SELECT * FROM account WHERE account_status = ?";
+			
+			PreparedStatement ps= connection.prepareStatement(sql);
+			ps.setString(1, status);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+			 Account a = new Account(rs.getInt("account_id"), rs.getDouble("balance"), rs.getInt("user_id"),rs.getString("account_type"),rs.getString("account_status"));
+			 list.add(a);
+
+			}
+			log.debug("All accounts with status " + status +" have been found");
+			return list;
+			
+		}catch (SQLException e) {
+			// TODO: handle exception
+			log.warn("Failed to access database", e);
+		}
+		
+		
+		return null;
+	}
+
 }
