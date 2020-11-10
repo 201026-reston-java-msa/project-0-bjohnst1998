@@ -7,8 +7,12 @@ import com.revature.repositories.UserDAO;
 import com.revature.repositories.UserDAOImpl;
 
 public class UserServiceImpl implements UserService {
-	UserDAO uDao = new UserDAOImpl();
+	UserDAO uDao = null;
 
+	 public UserServiceImpl() {
+		 uDao = new UserDAOImpl();
+	}
+	
 	@Override
 	public User findUser(int userId) {
 		// TODO Auto-generated method stub
@@ -38,6 +42,7 @@ public class UserServiceImpl implements UserService {
 
 		User u = uDao.findUserByName(username);
 		if (u != null) {
+			//Check to make sure the password is correct
 			if(password.equals(u.getPassword()))
 			{
 				return u;

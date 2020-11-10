@@ -9,7 +9,12 @@ import com.revature.repositories.AccountDAO;
 import com.revature.repositories.AccountDAOImpl;
 
 public class AccountServiceImpl implements AccountService {
-	private static AccountDAO aDao = new AccountDAOImpl();
+	private  AccountDAO aDao = null;
+	
+	public AccountServiceImpl()
+	{
+		aDao = new AccountDAOImpl();
+	}
 
 	@Override
 	public List<Account> findAll() {
@@ -48,31 +53,27 @@ public class AccountServiceImpl implements AccountService {
 			b.setBalance(b.getBalance() + amount);
 			return aDao.transact(a, b);
 		} else {
+			System.out.println("Insufficient Funds");
 			return false;
 		}
 
 	}
 
 	public boolean deposit(Account a, double amount) {
-		if (a.getAccountStatus().equals("open")) {
-			a.setBalance(a.getBalance() + amount);
-			return aDao.update(a);
-		} else {
-			return false;
-		}
+
+		a.setBalance(a.getBalance() + amount);
+		return aDao.update(a);
 
 	}
 
-	public boolean withdraw(Account a, double amount)
-	{
-		if(a.getAccountStatus().equals("open") && a.getBalance() >= amount)
-		{
+	public boolean withdraw(Account a, double amount) {
+		if (a.getBalance() >= amount) {
 			a.setBalance(a.getBalance() - amount);
 			return aDao.update(a);
-		}
-		else {
+		} else {
+			System.out.println("Insufficient Funds");
 			return false;
-		}	
+		}
 	}
 
 	@Override

@@ -138,13 +138,14 @@ public class AccountDAOImpl implements AccountDAO {
 
 			ps.executeUpdate();
 			log.debug(a.getId() + "was updated successfully");
+			return true;
+
 		} catch (SQLException e) {
 			log.warn("Could not access database", e);
 			return false;
 
 		}
 
-		return true;
 	}
 
 	public boolean transact(Account a, Account b) {
