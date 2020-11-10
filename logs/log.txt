@@ -1,0 +1,39 @@
+2020-11-10 10:48:35 WARN  EmployeeDAOImpl:87 - Could not access database
+org.postgresql.util.PSQLException: ERROR: insert or update on table "account" violates foreign key constraint "account_user_id_fkey"
+  Detail: Key (user_id)=(1) is not present in table "user_info".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:124)
+	at com.revature.repositories.AccountDAOImpl.insert(AccountDAOImpl.java:84)
+	at com.revature.Driver.main(Driver.java:24)
+2020-11-10 10:48:35 WARN  EmployeeDAOImpl:87 - Could not access database
+org.postgresql.util.PSQLException: ERROR: insert or update on table "account" violates foreign key constraint "account_user_id_fkey"
+  Detail: Key (user_id)=(3) is not present in table "user_info".
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:124)
+	at com.revature.repositories.AccountDAOImpl.insert(AccountDAOImpl.java:84)
+	at com.revature.Driver.main(Driver.java:25)
+2020-11-10 13:04:13 WARN  EmployeeDAOImpl:83 - Could not access database
+org.postgresql.util.PSQLException: ERROR: null value in column "permissionlevel" violates not-null constraint
+  Detail: Failing row contains (4, warlock, 123, bjames@gmail.com, ben, james, null, 2020-11-10 13:04:12.193538-05).
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:124)
+	at com.revature.repositories.UserDAOImpl.insert(UserDAOImpl.java:80)
+	at com.revature.services.UserServiceImpl.insert(UserServiceImpl.java:27)
+	at com.revature.Driver.createAccount(Driver.java:101)
+	at com.revature.Driver.run(Driver.java:43)
+	at com.revature.Driver.main(Driver.java:22)
