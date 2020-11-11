@@ -218,3 +218,10 @@ java.lang.NullPointerException
 2020-11-10 19:09:56 DEBUG AccountDAOImpl:88 - 104was found successfully
 2020-11-10 19:10:03 DEBUG AccountDAOImpl:139 - 104was updated successfully
 2020-11-10 19:11:01 DEBUG UserDAOImpl:127 - employee was found in DB.
+2020-11-11 10:26:21 DEBUG UserDAOImpl:81 - dandy123 was inserted successfully.
+2020-11-11 10:26:36 DEBUG UserDAOImpl:127 - dandy123 was found in DB.
+2020-11-11 10:26:48 DEBUG AccountDAOImpl:112 - New account was inserted successfully
+2020-11-11 10:26:51 DEBUG AccountDAOImpl:139 - 105was updated successfully
+2020-11-11 10:27:04 DEBUG AccountDAOImpl:59 - 10's account #105was found successfully
+2020-11-11 10:27:42 DEBUG UserDAOImpl:106 - dandy123 was updated successfully.
+2020-11-11 10:28:29 DEBUG UserDAOImpl:127 - employee was found in DB.

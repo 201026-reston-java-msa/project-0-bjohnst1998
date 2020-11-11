@@ -41,7 +41,7 @@ public class Driver {
 					logIn(in);
 				} else {
 					// Create account
-					System.out.println("Would you like to create an account Y/N?");
+					System.out.println("Would you like to create an account? [Y/N]");
 					userInput = in.nextLine();
 					if (userInput.equalsIgnoreCase("y")) {
 						createAccount(in);
@@ -108,6 +108,7 @@ public class Driver {
 			u.setPermissionLevel("customer");
 			if (userServ.insert(u)) { // Attempt to push new user to the DB.
 				System.out.println("Your account has been created.\nPlease log in");
+				System.out.println("----------------------");
 				logIn(in);
 			} else {
 				System.out.println("Account creation failed! Please try again\n");
@@ -120,7 +121,7 @@ public class Driver {
 	// Set of commands that a Customer can access.
 	static void customerCommands(Scanner in) {
 		System.out.println(
-				"1: Create bank account\n2: View your accounts\n3: View personal information\n4: Perform transaction\n5: Sign out");
+				"1:Create bank account\n2:View your accounts\n3:View personal information\n4:Perform transaction\n5:Sign out");
 		String input = in.nextLine();
 
 		if (input.equals("1")) {
@@ -139,7 +140,7 @@ public class Driver {
 
 	// Set of commands an employee can access
 	static void employeeCommands(Scanner in) {
-		System.out.println("1:Look up user\n2:Look up account\n3:Approve accounts\n4: Sign out");
+		System.out.println("1:Look up user\n2:Look up account\n3:Approve accounts\n4:Sign out");
 		String input = in.nextLine();
 
 		if (input.equals("1")) {
@@ -162,7 +163,7 @@ public class Driver {
 	// Set of commands an admin can access.
 	static void adminCommands(Scanner in) {
 		System.out.println(
-				"1:Look up user\n2:Look up account\n3:Approve accounts\n4:Perform transaction\n5:Cancel accounts\n6: Sign out");
+				"1:Look up user\n2:Look up account\n3:Approve accounts\n4:Perform transaction\n5:Cancel accounts\n6:Sign out");
 		String input = in.nextLine();
 
 		if (input.equals("1")) {
@@ -279,7 +280,7 @@ public class Driver {
 			// Check to see if logged user can update information
 			if (loggedInUser.getPermissionLevel().equalsIgnoreCase("customer") && loggedInUser.getId() == userId
 					|| loggedInUser.getPermissionLevel().equalsIgnoreCase("admin")) {
-				System.out.println("Would you like to update any information? Y/N");
+				System.out.println("Would you like to update any information? [Y/N]");
 				String s = in.nextLine();
 				if (s.equalsIgnoreCase("y")) {
 					System.out.println("If you do not want to change a field, leave it blank");
@@ -312,7 +313,9 @@ public class Driver {
 
 					if (userServ.update(u)) { // Attempt to update information
 						System.out.println("Information updated!");
+						System.out.println("--------------------");
 						System.out.println(u);
+						System.out.println("--------------------");
 						evaluatePermissionContent(in);
 
 					} else {
@@ -359,7 +362,7 @@ public class Driver {
 			Account a = aServ.findAccount(aId);
 			a.setAccountStatus(status);
 			if (aServ.update(a)) {
-				System.out.println("Account status updated!\nWould you like to confirm another account? Y/N");
+				System.out.println("Account status updated!\nWould you like to confirm another account? [Y/N]");
 				String s = in.nextLine();
 				if (s.equalsIgnoreCase("n")) {
 					break;
@@ -418,7 +421,7 @@ public class Driver {
 						System.out.println("Invalid amount");
 						performTransactions(in);
 					} else {
-						System.out.println("Confirm deposit of $" + d + " to account #" + a.getId() + " Y/N");
+						System.out.println("Confirm deposit of $" + d + " to account #" + a.getId() + " [Y/N]");
 						String s = in.nextLine();
 						if (s.equalsIgnoreCase("y")) {
 							if (aServ.deposit(a, d)) {
@@ -476,7 +479,7 @@ public class Driver {
 						System.out.println("Invalid transaction");
 						performTransactions(in);
 					} else {
-						System.out.println("Confirm withdrawl of $" + d + " from account #" + a.getId() + " Y/N");
+						System.out.println("Confirm withdrawl of $" + d + " from account #" + a.getId() + " [Y/N]");
 						String s = in.nextLine();
 						if (s.equalsIgnoreCase("y")) {
 							if (aServ.withdraw(a, d)) {
@@ -540,7 +543,7 @@ public class Driver {
 					}
 					else {
 						System.out.println("Confirm tranfer of $" + d + " from account #" + a.getId() + " to account #"
-								+ b.getId() + " Y/N");
+								+ b.getId() + " [Y/N]");
 						String s = in.nextLine();
 						if (s.equalsIgnoreCase("y")) {
 							if (aServ.transfer(a, b, d)) {
