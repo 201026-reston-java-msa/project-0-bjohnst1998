@@ -227,6 +227,9 @@ public class Driver {
 			in.nextLine();
 			if (aServ.deposit(a, d)) {
 				System.out.println("You deposited: $" + d + "\n");
+				System.out.println("--------------------");
+				System.out.println(a.toString());
+				System.out.println("--------------------");
 				System.out.println(
 						"Your account is now pending approval by an employee.\nWhile the account is pending you may not perform transactions.");
 			}
@@ -403,56 +406,60 @@ public class Driver {
 		int id = in.nextInt();
 		if (id == 0) {
 			performTransactions(in);
-			return;
 		}
-		Account a = null;
+		else {
+			Account a = null;
 
-		try {
-			a = aServ.findAccount(id);
-			if (a.getAccountStatus().equalsIgnoreCase("open")) {
-				// Make sure user can use this account
-				if (a.getUser_id() == loggedInUser.getId()
-						|| loggedInUser.getPermissionLevel().equalsIgnoreCase("admin")) {
-					System.out.println("Current balance of Account #" + a.getId() + " is " + a.getBalance());
-					System.out.println("How much would you like to deposit?\n");
-					double d = in.nextDouble();
-					in.nextLine();
-					if (d < 0) {
-						System.out.println("Invalid amount");
-						performTransactions(in);
-					} else {
-						System.out.println("Confirm deposit of $" + d + " to account #" + a.getId() + " [Y/N]");
-						String s = in.nextLine();
-						if (s.equalsIgnoreCase("y")) {
-							if (aServ.deposit(a, d)) {
-								System.out.println("Deposited $" + d + " into account #" + a.getId() + "\nNew Balance: "
-										+ a.getBalance());
-								performTransactions(in);
-							} else {
-								System.out.println("Failed to perform deposit. Please contact our support #");
-							}
-						} else {
-							System.out.println("Transaction cancelled! Returning to transactions menu.");
+			try {
+				a = aServ.findAccount(id);
+				if (a.getAccountStatus().equalsIgnoreCase("open")) {
+					// Make sure user can use this account
+					if (a.getUser_id() == loggedInUser.getId()
+							|| loggedInUser.getPermissionLevel().equalsIgnoreCase("admin")) {
+						//display balance
+						System.out.println("Current balance of Account #" + a.getId() + " is " + a.getBalance());
+						//get deposit amount
+						System.out.println("How much would you like to deposit?\n");
+						double d = in.nextDouble();
+						in.nextLine();
+						if (d < 0) {
+							System.out.println("Invalid amount");
 							performTransactions(in);
+						} else {
+							System.out.println("Confirm deposit of $" + d + " to account #" + a.getId() + " [Y/N]");
+							String s = in.nextLine();
+							if (s.equalsIgnoreCase("y")) {
+								if (aServ.deposit(a, d)) {
+									System.out.println("Deposited $" + d + " into account #" + a.getId() + "\nNew Balance: "
+											+ a.getBalance());
+									performTransactions(in);
+								} else {
+									System.out.println("Failed to perform deposit. Please contact our support #");
+								}
+							} else {
+								System.out.println("Transaction cancelled! Returning to transactions menu.");
+								performTransactions(in);
+							}
 						}
+
+					} else {
+						System.out.println("You do not have permission to use this account!");
+						deposit(in);
+
 					}
-
 				} else {
-					System.out.println("You do not have permission to use this account!");
+					System.out.println("This account is currently " + a.getAccountStatus()
+							+ "\nYou cannot perform transactions at this time.");
 					deposit(in);
-
 				}
-			} else {
-				System.out.println("This account is currently " + a.getAccountStatus()
-						+ "\nYou cannot perform transactions at this time.");
-				deposit(in);
+			} catch (NullPointerException e) {
+				log.warn("Could not find account", e);
+				performTransactions(in);
+
 			}
-		} catch (NullPointerException e) {
-			log.warn("Could not find account", e);
-			performTransactions(in);
 
 		}
-
+		
 	}
 
 	static void withdraw(Scanner in) {
@@ -462,56 +469,58 @@ public class Driver {
 		in.nextLine();
 		if (id == 0) {
 			performTransactions(in);
-			return;
 		}
-		Account a = null;
-		try {
-			a = aServ.findAccount(id);
-			if (a.getAccountStatus().equalsIgnoreCase("open")) {
-				// Make sure user can use this account
-				if (a.getUser_id() == loggedInUser.getId()
-						|| loggedInUser.getPermissionLevel().equalsIgnoreCase("admin")) {
-					System.out.println("Current balance of Account #" + a.getId() + " is " + a.getBalance());
-					System.out.println("How much would you like to withdraw?\n");
-					double d = in.nextDouble();
-					in.nextLine();
-					if (d < 0) {
-						System.out.println("Invalid transaction");
-						performTransactions(in);
-					} else {
-						System.out.println("Confirm withdrawl of $" + d + " from account #" + a.getId() + " [Y/N]");
-						String s = in.nextLine();
-						if (s.equalsIgnoreCase("y")) {
-							if (aServ.withdraw(a, d)) {
-								System.out.println("Withdrew $" + d + " from account #" + a.getId() + "\nNew Balance: "
-										+ a.getBalance());
-								performTransactions(in);
+		else {
+			Account a = null;
+			try {
+				a = aServ.findAccount(id);
+				if (a.getAccountStatus().equalsIgnoreCase("open")) {
+					// Make sure user can use this account
+					if (a.getUser_id() == loggedInUser.getId()
+							|| loggedInUser.getPermissionLevel().equalsIgnoreCase("admin")) {
+						System.out.println("Current balance of Account #" + a.getId() + " is " + a.getBalance());
+						System.out.println("How much would you like to withdraw?\n");
+						double d = in.nextDouble();
+						in.nextLine();
+						if (d < 0) {
+							System.out.println("Invalid transaction");
+							performTransactions(in);
+						} else {
+							System.out.println("Confirm withdrawl of $" + d + " from account #" + a.getId() + " [Y/N]");
+							String s = in.nextLine();
+							if (s.equalsIgnoreCase("y")) {
+								if (aServ.withdraw(a, d)) {
+									System.out.println("Withdrew $" + d + " from account #" + a.getId() + "\nNew Balance: "
+											+ a.getBalance());
+									performTransactions(in);
+								} else {
+									System.out.println("Failed to perform withdraw. Please contact our support #");
+									performTransactions(in);
+								}
 							} else {
-								System.out.println("Failed to perform withdraw. Please contact our support #");
+								System.out.println("Transaction cancelled! Returning to transactions menu.");
 								performTransactions(in);
 							}
-						} else {
-							System.out.println("Transaction cancelled! Returning to transactions menu.");
-							performTransactions(in);
 						}
+
+					} else {
+						System.out.println("You do not have permission to use this account!");
+						withdraw(in);
+
 					}
-
 				} else {
-					System.out.println("You do not have permission to use this account!");
+					System.out.println("This account is currently " + a.getAccountStatus()
+							+ "\nYou cannot perform transactions at this time.");
 					withdraw(in);
-
 				}
-			} else {
-				System.out.println("This account is currently " + a.getAccountStatus()
-						+ "\nYou cannot perform transactions at this time.");
-				withdraw(in);
+			} catch (NullPointerException e) {
+				log.warn("Could not find account", e);
+				performTransactions(in);
+
 			}
-		} catch (NullPointerException e) {
-			log.warn("Could not find account", e);
-			performTransactions(in);
 
 		}
-
+		
 	}
 
 	static void transfer(Scanner in) {
@@ -520,59 +529,62 @@ public class Driver {
 		int id = in.nextInt();
 		if (id == 0) {
 			performTransactions(in);
-			return;
+			
 		}
-		System.out.println("Please enter the account # you with to transfer to.");
-		int id2 = in.nextInt();
+		else {
+			System.out.println("Please enter the account # you with to transfer to.");
+			int id2 = in.nextInt();
 
-		try {
-			Account a = aServ.findAccount(id);
-			Account b = aServ.findAccount(id2);
-			if (a.getAccountStatus().equalsIgnoreCase("open") && b.getAccountStatus().equalsIgnoreCase("open")) {
-				// Make sure user can use this account
-				if (a.getUser_id() == loggedInUser.getId()
-						|| loggedInUser.getPermissionLevel().equalsIgnoreCase("admin")) {
-					System.out.println("Current balance of Account #" + a.getId() + " is " + a.getBalance());
-					System.out.println("How much would you like to transfer?");
-					double d = in.nextDouble();
-					in.nextLine();
-					if(d <0)
-					{
-						System.out.println("Invalid amount");
-						performTransactions(in);
-					}
-					else {
-						System.out.println("Confirm tranfer of $" + d + " from account #" + a.getId() + " to account #"
-								+ b.getId() + " [Y/N]");
-						String s = in.nextLine();
-						if (s.equalsIgnoreCase("y")) {
-							if (aServ.transfer(a, b, d)) {
-								System.out.println("Transfer complete!");
-								performTransactions(in);
-							} else {
-								System.out.println(
-										"Transfer failed, please try again or if the issue persists contact our support #");
+			try {
+				Account a = aServ.findAccount(id);
+				Account b = aServ.findAccount(id2);
+				if (a.getAccountStatus().equalsIgnoreCase("open") && b.getAccountStatus().equalsIgnoreCase("open")) {
+					// Make sure user can use this account
+					if (a.getUser_id() == loggedInUser.getId()
+							|| loggedInUser.getPermissionLevel().equalsIgnoreCase("admin")) {
+						System.out.println("Current balance of Account #" + a.getId() + " is " + a.getBalance());
+						System.out.println("How much would you like to transfer?");
+						double d = in.nextDouble();
+						in.nextLine();
+						if(d <0)
+						{
+							System.out.println("Invalid amount");
+							performTransactions(in);
+						}
+						else {
+							System.out.println("Confirm tranfer of $" + d + " from account #" + a.getId() + " to account #"
+									+ b.getId() + " [Y/N]");
+							String s = in.nextLine();
+							if (s.equalsIgnoreCase("y")) {
+								if (aServ.transfer(a, b, d)) {
+									System.out.println("Transfer complete!");
+									performTransactions(in);
+								} else {
+									System.out.println(
+											"Transfer failed, please try again or if the issue persists contact our support #");
+								}
 							}
 						}
+						
+
+					} else {
+						System.out.println("You do not have permission to use this account!");
+						deposit(in);
+
 					}
-					
-
 				} else {
-					System.out.println("You do not have permission to use this account!");
+					System.out.println("This account is currently " + a.getAccountStatus()
+							+ "\nYou cannot perform transactions at this time.");
 					deposit(in);
-
 				}
-			} else {
-				System.out.println("This account is currently " + a.getAccountStatus()
-						+ "\nYou cannot perform transactions at this time.");
-				deposit(in);
+			} catch (NullPointerException e) {
+				log.warn("Could not find account", e);
+				performTransactions(in);
+
 			}
-		} catch (NullPointerException e) {
-			log.warn("Could not find account", e);
-			performTransactions(in);
 
 		}
-
+		
 	}
 
 	static void cancelAccount(Scanner in) {
