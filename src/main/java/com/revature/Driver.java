@@ -188,6 +188,20 @@ public class Driver {
 		}
 	}
 
+	static void evaluatePermissionContent(Scanner in) {
+
+		if (loggedInUser.getPermissionLevel().equals("customer")) {
+			// Customer Logic
+			customerCommands(in);
+		} else if (loggedInUser.getPermissionLevel().equals("employee")) {
+			// Employee Logic
+			employeeCommands(in);
+		} else if (loggedInUser.getPermissionLevel().equals("admin")) {
+			// Admin logic
+			adminCommands(in);
+		}
+	}
+
 	// Below this point are all the commands set up in a modular design to prevent
 	// repetition
 	// Attempts to open a new account
@@ -322,19 +336,6 @@ public class Driver {
 	}
 
 	// This helps redirect a user back to their correct set of commands.
-	static void evaluatePermissionContent(Scanner in) {
-
-		if (loggedInUser.getPermissionLevel().equals("customer")) {
-			// Customer Logic
-			customerCommands(in);
-		} else if (loggedInUser.getPermissionLevel().equals("employee")) {
-			// Employee Logic
-			employeeCommands(in);
-		} else if (loggedInUser.getPermissionLevel().equals("admin")) {
-			// Admin logic
-			adminCommands(in);
-		}
-	}
 
 	static void confirmPendingAccounts(Scanner in) {
 		if (loggedInUser.getPermissionLevel().equals("customer")) {
