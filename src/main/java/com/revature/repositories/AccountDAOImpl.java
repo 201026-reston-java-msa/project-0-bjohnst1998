@@ -14,7 +14,7 @@ import com.revature.models.Account;
 import com.revature.util.ConnectionUtil;
 
 public class AccountDAOImpl implements AccountDAO {
-	private static Logger log = Logger.getLogger(EmployeeDAOImpl.class);
+	private static Logger log = Logger.getLogger(AccountDAOImpl.class);
 
 	@Override
 	public List<Account> findAll() {
@@ -133,9 +133,8 @@ public class AccountDAOImpl implements AccountDAO {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setDouble(1, a.getBalance());
 			ps.setInt(2, a.getUser_id());
-			ps.setInt(3, a.getId());
-			ps.setString(4, a.getAccountStatus());
-
+			ps.setString(3, a.getAccountStatus());
+			ps.setInt(4, a.getId());
 			ps.executeUpdate();
 			log.debug(a.getId() + "was updated successfully");
 			return true;

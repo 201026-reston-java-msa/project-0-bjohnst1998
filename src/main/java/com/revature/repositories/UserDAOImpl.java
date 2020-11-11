@@ -14,7 +14,7 @@ import com.revature.models.User;
 import com.revature.util.ConnectionUtil;
 
 public class UserDAOImpl implements UserDAO {
-	private static Logger log = Logger.getLogger(EmployeeDAOImpl.class);
+	private static Logger log = Logger.getLogger(UserDAOImpl.class);
 
 	@Override
 	public User findUser(int userI) {
@@ -95,12 +95,12 @@ public class UserDAOImpl implements UserDAO {
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, u.getUsername());
-			ps.setString(1, u.getPassword());
-			ps.setString(1, u.getEmail());
-			ps.setString(1, u.getFirstName());
-			ps.setString(1, u.getLastName());
-			ps.setString(1, u.getPermissionLevel());
-			ps.setInt(1, u.getId());
+			ps.setString(2, u.getPassword());
+			ps.setString(3, u.getEmail());
+			ps.setString(4, u.getFirstName());
+			ps.setString(5, u.getLastName());
+			ps.setString(6, u.getPermissionLevel());
+			ps.setInt(7, u.getId());
 
 			ps.executeUpdate();
 			log.debug(u.getUsername()+ " was updated successfully.");

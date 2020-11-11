@@ -62,3 +62,159 @@ org.postgresql.util.PSQLException: ERROR: null value in column "account_id" viol
 2020-11-10 14:53:32 DEBUG EmployeeDAOImpl:59 - 5's account #100was found successfully
 2020-11-10 14:58:05 DEBUG EmployeeDAOImpl:127 - warlock was found in DB.
 2020-11-10 14:58:06 DEBUG EmployeeDAOImpl:59 - 5's account #100was found successfully
+2020-11-10 18:21:22 DEBUG EmployeeDAOImpl:81 - jDonny was inserted successfully.
+2020-11-10 18:21:29 DEBUG EmployeeDAOImpl:127 - jDonny was found in DB.
+2020-11-10 18:21:59 WARN  EmployeeDAOImpl:109 - Could not access database
+org.postgresql.util.PSQLException: No value specified for parameter 2.
+	at org.postgresql.core.v3.SimpleParameterList.checkAllParametersSet(SimpleParameterList.java:264)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:294)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:124)
+	at com.revature.repositories.UserDAOImpl.update(UserDAOImpl.java:105)
+	at com.revature.services.UserServiceImpl.update(UserServiceImpl.java:37)
+	at com.revature.Driver.viewUser(Driver.java:286)
+	at com.revature.Driver.customerCommands(Driver.java:130)
+	at com.revature.Driver.logIn(Driver.java:73)
+	at com.revature.Driver.createAccount(Driver.java:110)
+	at com.revature.Driver.run(Driver.java:46)
+	at com.revature.Driver.main(Driver.java:26)
+2020-11-10 18:27:08 DEBUG UserDAOImpl:127 - jDonny was found in DB.
+2020-11-10 18:27:22 WARN  UserDAOImpl:109 - Could not access database
+org.postgresql.util.PSQLException: No value specified for parameter 2.
+	at org.postgresql.core.v3.SimpleParameterList.checkAllParametersSet(SimpleParameterList.java:264)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:294)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:124)
+	at com.revature.repositories.UserDAOImpl.update(UserDAOImpl.java:105)
+	at com.revature.services.UserServiceImpl.update(UserServiceImpl.java:37)
+	at com.revature.Driver.viewUser(Driver.java:285)
+	at com.revature.Driver.customerCommands(Driver.java:129)
+	at com.revature.Driver.logIn(Driver.java:72)
+	at com.revature.Driver.run(Driver.java:39)
+	at com.revature.Driver.main(Driver.java:25)
+2020-11-10 18:29:02 DEBUG UserDAOImpl:127 - jDonny was found in DB.
+2020-11-10 18:29:13 WARN  UserDAOImpl:109 - Could not access database
+org.postgresql.util.PSQLException: No value specified for parameter 2.
+	at org.postgresql.core.v3.SimpleParameterList.checkAllParametersSet(SimpleParameterList.java:264)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:294)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:124)
+	at com.revature.repositories.UserDAOImpl.update(UserDAOImpl.java:105)
+	at com.revature.services.UserServiceImpl.update(UserServiceImpl.java:37)
+	at com.revature.Driver.viewUser(Driver.java:285)
+	at com.revature.Driver.customerCommands(Driver.java:129)
+	at com.revature.Driver.logIn(Driver.java:72)
+	at com.revature.Driver.run(Driver.java:39)
+	at com.revature.Driver.main(Driver.java:25)
+2020-11-10 18:29:52 DEBUG UserDAOImpl:127 - jDonny was found in DB.
+2020-11-10 18:30:02 DEBUG UserDAOImpl:106 -  was updated successfully.
+2020-11-10 18:30:50 DEBUG UserDAOImpl:127 -  was found in DB.
+2020-11-10 18:31:16 DEBUG UserDAOImpl:106 - jDonny was updated successfully.
+2020-11-10 18:31:27 DEBUG AccountDAOImpl:112 - New account was inserted successfully
+2020-11-10 18:31:31 WARN  AccountDAOImpl:144 - Could not access database
+org.postgresql.util.PSQLException: ERROR: operator does not exist: integer = character varying
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 81
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2505)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2241)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:310)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:124)
+	at com.revature.repositories.AccountDAOImpl.update(AccountDAOImpl.java:139)
+	at com.revature.services.AccountServiceImpl.deposit(AccountServiceImpl.java:65)
+	at com.revature.Driver.openAccount(Driver.java:211)
+	at com.revature.Driver.customerCommands(Driver.java:125)
+	at com.revature.Driver.evaluatePermissionContent(Driver.java:306)
+	at com.revature.Driver.viewUser(Driver.java:288)
+	at com.revature.Driver.customerCommands(Driver.java:129)
+	at com.revature.Driver.logIn(Driver.java:72)
+	at com.revature.Driver.run(Driver.java:39)
+	at com.revature.Driver.main(Driver.java:25)
+2020-11-10 18:33:42 DEBUG UserDAOImpl:127 - jDonny was found in DB.
+2020-11-10 18:33:49 DEBUG AccountDAOImpl:59 - 6's account #101was found successfully
+2020-11-10 18:35:06 DEBUG UserDAOImpl:127 - jDonny was found in DB.
+2020-11-10 18:35:11 DEBUG AccountDAOImpl:59 - 6's account #101was found successfully
+2020-11-10 18:35:16 DEBUG AccountDAOImpl:112 - New account was inserted successfully
+2020-11-10 18:35:19 WARN  AccountDAOImpl:143 - Could not access database
+org.postgresql.util.PSQLException: No value specified for parameter 4.
+	at org.postgresql.core.v3.SimpleParameterList.checkAllParametersSet(SimpleParameterList.java:264)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:294)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:447)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:368)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:158)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:124)
+	at com.revature.repositories.AccountDAOImpl.update(AccountDAOImpl.java:138)
+	at com.revature.services.AccountServiceImpl.deposit(AccountServiceImpl.java:65)
+	at com.revature.Driver.openAccount(Driver.java:211)
+	at com.revature.Driver.customerCommands(Driver.java:125)
+	at com.revature.Driver.evaluatePermissionContent(Driver.java:308)
+	at com.revature.Driver.viewUsersAccounts(Driver.java:232)
+	at com.revature.Driver.customerCommands(Driver.java:127)
+	at com.revature.Driver.logIn(Driver.java:72)
+	at com.revature.Driver.run(Driver.java:39)
+	at com.revature.Driver.main(Driver.java:25)
+2020-11-10 18:36:28 DEBUG UserDAOImpl:127 - jDonny was found in DB.
+2020-11-10 18:36:30 DEBUG AccountDAOImpl:112 - New account was inserted successfully
+2020-11-10 18:36:32 DEBUG AccountDAOImpl:139 - 103was updated successfully
+2020-11-10 18:38:52 DEBUG UserDAOImpl:81 - rand0 was inserted successfully.
+2020-11-10 18:39:05 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 18:39:11 DEBUG AccountDAOImpl:112 - New account was inserted successfully
+2020-11-10 18:39:15 DEBUG AccountDAOImpl:139 - 104was updated successfully
+2020-11-10 18:41:17 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 18:47:30 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 18:47:39 WARN  Driver:434 - Could not find account
+java.lang.NullPointerException
+	at com.revature.Driver.deposit(Driver.java:400)
+	at com.revature.Driver.performTransactions(Driver.java:377)
+	at com.revature.Driver.customerCommands(Driver.java:130)
+	at com.revature.Driver.logIn(Driver.java:71)
+	at com.revature.Driver.run(Driver.java:41)
+	at com.revature.Driver.main(Driver.java:25)
+2020-11-10 18:50:49 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 18:50:51 DEBUG AccountDAOImpl:59 - 7's account #104was found successfully
+2020-11-10 18:50:59 WARN  Driver:438 - Could not find account
+java.lang.NullPointerException
+	at com.revature.Driver.deposit(Driver.java:404)
+	at com.revature.Driver.performTransactions(Driver.java:381)
+	at com.revature.Driver.customerCommands(Driver.java:130)
+	at com.revature.Driver.evaluatePermissionContent(Driver.java:325)
+	at com.revature.Driver.viewUsersAccounts(Driver.java:235)
+	at com.revature.Driver.customerCommands(Driver.java:126)
+	at com.revature.Driver.logIn(Driver.java:71)
+	at com.revature.Driver.run(Driver.java:41)
+	at com.revature.Driver.main(Driver.java:25)
+2020-11-10 18:52:25 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 18:53:40 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 18:54:08 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 18:54:27 DEBUG AccountDAOImpl:88 - 104was found successfully
+2020-11-10 18:55:20 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 18:56:13 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 18:56:46 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 18:57:37 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 18:58:13 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 18:58:23 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 19:01:48 DEBUG UserDAOImpl:81 - realAdmin was inserted successfully.
+2020-11-10 19:01:48 DEBUG UserDAOImpl:81 - employee was inserted successfully.
+2020-11-10 19:02:06 DEBUG UserDAOImpl:127 - realAdmin was found in DB.
+2020-11-10 19:02:08 DEBUG AccountDAOImpl:188 - All accounts with status pending have been found
+2020-11-10 19:03:57 DEBUG UserDAOImpl:127 - realAdmin was found in DB.
+2020-11-10 19:04:02 DEBUG AccountDAOImpl:188 - All accounts with status Pending have been found
+2020-11-10 19:04:09 DEBUG AccountDAOImpl:88 - 104was found successfully
+2020-11-10 19:04:09 DEBUG AccountDAOImpl:139 - 104was updated successfully
+2020-11-10 19:04:20 DEBUG AccountDAOImpl:88 - 103was found successfully
+2020-11-10 19:04:20 DEBUG AccountDAOImpl:139 - 103was updated successfully
+2020-11-10 19:04:51 DEBUG AccountDAOImpl:88 - 100was found successfully
+2020-11-10 19:04:51 DEBUG AccountDAOImpl:139 - 100was updated successfully
+2020-11-10 19:09:42 DEBUG UserDAOImpl:127 - rand0 was found in DB.
+2020-11-10 19:09:44 DEBUG AccountDAOImpl:59 - 7's account #104was found successfully
+2020-11-10 19:09:56 DEBUG AccountDAOImpl:88 - 104was found successfully
+2020-11-10 19:10:03 DEBUG AccountDAOImpl:139 - 104was updated successfully
+2020-11-10 19:11:01 DEBUG UserDAOImpl:127 - employee was found in DB.

@@ -26,6 +26,16 @@ public class User {
 		this.email = email;
 		this.permissionLevel = permissionLevel;
 	}
+	public User(String username, String password, String firstName, String lastName, String email,String permissionLevel) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.permissionLevel = permissionLevel;
+	}
 
 	public int getId() {
 		return id;
@@ -85,8 +95,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User #" + id + "\nUser Name: " + username + "Password: " + password + "\nFirst Name: " + firstName
-				+ "Last Name: " + lastName + "\nEmail: " + email + "\nType Of User: " + permissionLevel;
+		return "User #" + id + "\nUser Name: " + username + "\nPassword: " + password + "\nFirst Name: " + firstName
+				+ "\nLast Name: " + lastName + "\nEmail: " + email + "\nType Of User: " + permissionLevel;
 	}
 
 	
